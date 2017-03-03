@@ -6,6 +6,7 @@
 
   function ForecastController($scope, $location, moment) {
     let vm = this;
+    vm.zip = 60661;
     vm.forecastDuration = moment.duration(2, 'd')
     vm.weatherObj = {}; // data from various stations, nested by date and then by datatype 
 
