@@ -13,6 +13,7 @@ const watch = {
 gulp.task('js', () =>
   gulp.src(['./app/app.js',
             './app/app.config.js',
+            './app/app.token.js', // DEVELOPMENT
             './app/app.run.js',
             './app/**/*.js'])
       .pipe(concat('script.js'))

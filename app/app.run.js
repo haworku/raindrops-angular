@@ -6,9 +6,15 @@
   Run.$inject = ['$rootScope'];
 
   function Run($rootScope) {
-    console.log('run!');
-    $rootScope.today = function() {
-      $scope.dt = new Date();
-    };
+    // $rootScope.token = 'your-token-here'; PRODUCTION
+    if ( $rootScope.token ){
+    	console.log('yay, you added a token')
+   	} else {
+   		console.log('no token, no love')
+   	}
+
+    // $rootScope.today = function() {
+    //   $scope.dt = new Date();
+    // };
   }
 })(window.angular);
