@@ -1,0 +1,25 @@
+{ 
+  "name": "starter-angular",
+  "main": "server.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": null
+  },
+  "devDependencies": {
+    "express": "^4.13.4",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.4.3",
+    "gulp-less": "^3.0.3",
+    "gulp-livereload": "^3.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-run": "^1.6.12",
+    "gulp-util": "^3.0.6",
+    "less": "^2.5.1"
+  },
+  "scripts": {
+    "less": "./node_modules/.bin/gulp less",
+    "js": "./node_modules/.bin/gulp js",
+    "dev": "./node_modules/.bin/gulp dev"
+  }
+}

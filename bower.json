@@ -1,0 +1,30 @@
+{
+  "version": "0.1.0",
+  "authors": [
+    "Hana Worku>"
+  ],
+  "name": "starter-angular",
+  "description": "Angular Starter",
+  "main": "index.html",
+  "keywords": [
+    "Angular",
+    "starter",
+    "template"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "angular-route": "~1.4.3",
+    "angular": "~1.4.3",
+    "jquery": "~2.1.4",
+    "angular-sanitize": "~1.4.3",
+    "angular-moment": "^1.0.1"
+  }
+}
