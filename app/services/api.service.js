@@ -28,8 +28,10 @@ angular
             let deferred = $q.defer();
             let dateRange = {start: '', end: ''}
 
+          fetchDataTypes: () => {
+            let deferred = $q.defer();
             $http
-              .get(`${ config.apiBase + config.apiBranch.dailySummary }&locationid=ZIP:${ zipcode }&startdate=${ dateRange.start }/enddate= ${ dateRange.end }`, config.headers)
+              .get(`${ config.apiBase}datatypes`, config.headers)
 
               .success((data) => {
                 deferred.resolve(data);
