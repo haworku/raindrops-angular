@@ -29,7 +29,8 @@ angular
             let dateRange = {start: '', end: ''}
 
             $http
-              .get(`${ config.apiBase + config.apiBranch.dailySummary }&locationid=ZIP:${ zipcode }&startdate=${ dateRange.start }/enddate= ${ dateRange.end }`)
+              .get(`${ config.apiBase + config.apiBranch.dailySummary }&locationid=ZIP:${ zipcode }&startdate=${ dateRange.start }/enddate= ${ dateRange.end }`, config.headers)
+
               .success((data) => {
                 deferred.resolve(data);
               })

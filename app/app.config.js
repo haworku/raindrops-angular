@@ -30,6 +30,7 @@
 
     apiProvider.config({
       apiBase: 'https://www.ncdc.noaa.gov/cdo-web/api/v2/',
+      headers: {},
     });
     
   }
