@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, minimal-ui" />
+    <meta name="keywords" content="keywords go here" />
+    <meta name="description" content="Starter Description Here" />
+    <meta name="author" content="Hana Worku" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="fragment" content="!" />
+
+    <base href="/"></base>
+
+    <title>Starter</title>
+
+    <link rel="shortcut icon" type="image/png" href="static/images/favicon.png" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="dist/style.css" />
+  </head>
+
+  <body ng-app="theApp">
+    <div ng-view></div>
+
+    <!-- <script src="/dist/script.js"></script> -->
+
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/moment/min/moment.min.js"></script>
+    <script src="/bower_components/angular-moment/angular-moment.min.js"></script>
+
+    <script src="/app/services/api.service.js"></script>
+
+    <script src="/app/app.js"></script>
+    <script src="/app/app.config.js"></script>
+    <script src="/app/app.run.js"></script>
+   
+    <script src="/app/controllers/welcome.controller.js"></script>
+    <script src="/app/controllers/forecast.controller.js"></script>
+
+    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+  </body>
+</html>
