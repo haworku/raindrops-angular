@@ -24,9 +24,21 @@ angular
            * @param  {Integer} zipcode
            * @return {Promise}
            */
-          query3Day: (zipcode) => {
+          fetchDurationForecastForZip: (zipcode, durationStart, durationEnd) => {
             let deferred = $q.defer();
-            let dateRange = {start: '', end: ''}
+            
+            $http
+              .get(`${ config.apiBase }data?datasetid=GHCND&locationid=ZIP:${ zipcode }&startdate=${ durationStart }/enddate= ${ durationEnd }`, config.headers)
+
+              .success((data) => {
+                deferred.resolve(data);
+              })
+              .error((err) => {
+                deferred.reject(err);
+              });
+
+            return deferred.promise;
+          },
 
           fetchDataTypes: () => {
             let deferred = $q.defer();
