@@ -6,12 +6,9 @@
 
   function ForecastController($rootScope, $scope, $location, $q, moment, api) {
     let vm = this;
-    vm.weather = {}; 
-    vm.current = {};
-    vm.forecast = {};
+    vm.weather = {}; // display
 
     vm.processData = (current,forecast) => {; 
-
     	let nestedData = {
     		now:  { 
     			summary: current.weather[0].description,
