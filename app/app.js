@@ -3,5 +3,6 @@
                          	'ngSanitize',
                          	'angularMoment',
                          	'service.api',
+                         	'directive.weatherBlock'
                          	]);
 })(window.angular);
