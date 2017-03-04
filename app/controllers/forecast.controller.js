@@ -7,8 +7,9 @@
   function ForecastController($rootScope, $scope, $location, moment, api) {
     let vm = this;
     vm.zip = 60661;
-    vm.forecastDuration = moment.duration(2, 'd')
     vm.weatherObj = {}; // data from various stations, nested by date and then by datatype 
+    vm.forecastDuration = moment.duration({'days' : 2});
+    vm.today = moment(new Date());
 
     vm.processData = (data) => {
     	let nestedData = {}
@@ -30,6 +31,7 @@
     }
 
     vm.getForecast = () => {
+    	let start = moment(vm.today).format('YYYY-MM-DD')
     	let endUnformatted =  vm.today.add(vm.forecastDuration);
     	let end = moment(endUnformatted).format('YYYY-MM-DD')
           
