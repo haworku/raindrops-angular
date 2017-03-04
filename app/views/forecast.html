@@ -4,36 +4,71 @@
 		<div></div>
 
 		<div class="col-md-12">
-			<div class="col-md-12 weather-box weather-today">
-				<h3>Currently</h3>
+			<div class="col-md-12 weather-box weather-now">
+				<h3>now</h3>
 				<img src="{{forecast.weather.now.icon}}">
+				<span 
+					class="now-summary"  
+					ng-bind="forecast.weather.now.summary">
+				</span>
+				<span 
+					class="now-temp"  
+					ng-bind="forecast.weather.now.temp + '°'">
+				</span>
 			</div>
 
-			<div class="col-md-6 weather-box weather-upcoming">
-				<h3>Today</h3>
-				<img src="{{forecast.weather.today.icon}}">
-			</div>
-			<div class="col-md-6 weather-box weather-upcoming">
-				<h3>Tomorrow</h3>
-				<img src="{{forecast.weather.one.icon}}">
+			<div 
+				ng-if="forecast.weather.today" 
+				class="col-md-6 weather-box weather-upcoming">
+				<weather-block 
+					weather="forecast.weather.today"
+					name="'today'">					
+				</weather-block>
 			</div>
 
-			<div class="col-md-3 weather-box weather-later">
-				<h3 ng-bind="forecast.weather.two.date | amDateFormat:'dddd'"></h3>
-				<img src="{{forecast.weather.two.icon}}">
+			<div 
+				ng-if="forecast.weather.one" 
+				class="col-md-6 weather-box weather-upcoming">
+				<weather-block 
+					weather="forecast.weather.one"
+					name="'tomorrow'">					
+				</weather-block>
 			</div>
-			<div class="col-md-3 weather-box weather-later">
-				<h3 ng-bind="forecast.weather.three.date | amDateFormat:'dddd'"></h3>
-				<img src="{{forecast.weather.three.icon}}">
+
+			<div 
+				ng-if="forecast.weather.two" 
+				class="col-md-3 weather-box weather-later">
+				<weather-block 
+					weather="forecast.weather.two"
+					name="forecast.weather.two.date | amDateFormat:'dddd'">					
+				</weather-block>
 			</div>
-			<div class="col-md-3 weather-box weather-later">
-				<h3 ng-bind="forecast.weather.four.date | amDateFormat:'dddd'"></h3>
-				<img src="{{forecast.weather.four.icon}}">
-			</div>
-			<div class="col-md-3 weather-box weather-later">
-				<h3 ng-bind="forecast.weather.five.date | amDateFormat:'dddd'"></h3>
-				<img src="{{forecast.weather.five.icon}}">
-			</div>
+
+		<div 
+			ng-if="forecast.weather.three" 
+			class="col-md-3 weather-box weather-later">
+			<weather-block 
+				weather="forecast.weather.three"
+				name="forecast.weather.three.date | amDateFormat:'dddd'">					
+			</weather-block>
+		</div>
+
+		<div 
+			ng-if="forecast.weather.four" 
+			class="col-md-3 weather-box weather-later">
+			<weather-block 
+				weather="forecast.weather.four"
+				name="forecast.weather.four.date | amDateFormat:'dddd'">					
+			</weather-block>
+		</div>
+
+		<div 
+			ng-if="forecast.weather.five" 
+			class="col-md-3 weather-box weather-later">
+			<weather-block 
+				weather="forecast.weather.five"
+				name="forecast.weather.five.date | amDateFormat:'dddd'">					
+			</weather-block>
 		</div>
 	</div>
 </div>
