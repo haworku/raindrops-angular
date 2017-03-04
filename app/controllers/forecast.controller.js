@@ -25,9 +25,9 @@
     */
     vm.checkType = () => {
       if ($rootScope.zip !== 0 && $rootScope.load ){ 
-        return 'zip code'
+        return 'zip code';
       } else {
-        return 'coordinates'
+        return 'coordinates';
       }
     }
 
@@ -94,7 +94,7 @@
 				}
 			}
 
-      console.log('forecast complete.')
+      console.log('forecast complete.');
     	return (nestedData);
     }
 
@@ -116,7 +116,7 @@
           vm.weather = vm.processData(vm.current, vm.forecast);
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
         })
 
       } else if ($rootScope.coordinates !== {} && $rootScope.load) {  
@@ -129,11 +129,11 @@
           vm.weather = vm.processData(vm.current, vm.forecast);
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
         })
 
       } else {
-        console.log('waiting for location')
+        console.log('waiting for location');
       }
     } 
 	}

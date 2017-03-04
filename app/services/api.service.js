@@ -26,7 +26,7 @@ angular
            */
           fetchForecastByZip: (zipcode) => {
             let deferred = $q.defer();
-            
+    
             $http
               .get(`${ config.apiBase }forecast/daily?zip=${ zipcode },us&cnt=6&units=imperial${ config.apiKey }`)
 
@@ -46,6 +46,7 @@ angular
            */
           fetchCurrentByZip: (zipcode) => {
             let deferred = $q.defer();
+
             $http
               .get(`${ config.apiBase }weather?zip=${ zipcode },us&units=imperial${ config.apiKey }`)
 
@@ -85,6 +86,7 @@ angular
            */
           fetchCurrentByCoord: (lat, lon) => {
             let deferred = $q.defer();
+            
             $http
               .get(`${ config.apiBase }weather?lat=${ lat }&lon=${ lon }&units=imperial${ config.apiKey }`)
 
