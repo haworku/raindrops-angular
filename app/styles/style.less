@@ -1,6 +1,7 @@
 body{
 	margin-bottom: 1em;
-	font-family: helvetica;
+	font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+  -webkit-font-smoothing: antialiased !important;
 }
 
 .weather {
@@ -13,12 +14,18 @@ body{
 		min-height: 200px;
 	}
 	&-today {
-		
+		h3 {
+			font-size: 25px;
+		}
 	}
 	&-upcoming {
-
+		h3 {
+			font-size: 20px;
+		}
 	}
 	&-later {
-
+		h3 {
+			font-size: 15px;
+		}
 	}
 }
