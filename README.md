@@ -3,7 +3,7 @@
 Weather forecasting with NOAA apis - that's all folks.
 
 ## Stories
-- Three day forecast populated with user's current location. 
+- Five day forecast populated with user's current location. 
 - Should the user decline to offer their location, goes to default.
 
 ## With
