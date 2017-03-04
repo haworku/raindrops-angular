@@ -6,30 +6,77 @@
 
   function ForecastController($rootScope, $scope, $location, $q, moment, api) {
     let vm = this;
-    vm.zip = 60661;
-    vm.forecastDuration = moment.duration({'days' : 2});
     vm.weatherObj = {}; 
-    vm.today = moment(new Date());
-    // data from various stations, nested by date and then by datatype 
+    vm.current = {};
+    vm.forecast = {};
 
-    vm.processData = (data) => {
-    	// console.log(data)
-    	let nestedData = {}
+    vm.processData = (current,forecast) => {
+    	let dates = {
+    		one: moment().add(1, 'days'),
+    		two: moment().add(2, 'days'), 
+    		three: moment().add(3, 'days'),
+    		four: moment().add(4, 'days'),
+    		five: moment().add(5, 'days'),
+    	}
 
-    	data.forEach( result => {
-    		if ( result.date in nestedData === false) { 
-    			nestedData[result.date] = {};
-    		}
+    	let nestedData = {
+    		now:  { 
+    			summary: current.weather[0].description,
+    			icon: `http://openweathermap.org/img/w/${ current.weather[0].icon }.png`,
+					temp: current.main.temp,
+				},
+				today: {
+					date: moment(vm.today).format('dddd, MMMM Do YYYY'),
+    			summary: forecast[0].weather[0].description,
+    			icon: `http://openweathermap.org/img/w/${ forecast[0].weather[0].icon }.png`,
+    			temp: forecast[0].temp.day,
+					max: forecast[0].temp.max,
+					min: forecast[0].temp.min
+				},
+				one:  { 
+					date: moment(dates.one).format('dddd, MMMM Do YYYY'),
+    			summary: forecast[1].weather[0].description,
+    			icon: `http://openweathermap.org/img/w/${ forecast[0].weather[0].icon }.png`,
+    			temp: forecast[1].temp.day,
+					max: forecast[1].temp.max,
+					min: forecast[1].temp.min
+				},
+				two:  { 
+					date: moment(dates.two).format('dddd, MMMM Do YYYY'),
+    			summary: forecast[2].weather[0].description,
+    			icon: `http://openweathermap.org/img/w/${ forecast[0].weather[0].icon }.png`,
+    			temp: forecast[2].temp.day,
+					max: forecast[2].temp.max,
+					min: forecast[2].temp.min
+				},
+				three:  { 
+					date: moment(dates.three).format('dddd, MMMM Do YYYY'),
+    			summary: forecast[3].weather[0].description,
+    			icon: `http://openweathermap.org/img/w/${ forecast[0].weather[0].icon }.png`,
+    			temp: forecast[3].temp.day,
+					max: forecast[3].temp.max,
+					min: forecast[3].temp.min
+				},
+				four:  { 
+					date: moment(dates.four).format('dddd, MMMM Do YYYY'),
+    			summary: forecast[4].weather[0].description,
+    			icon: `http://openweathermap.org/img/w/${ forecast[0].weather[0].icon }.png`,
+    			temp: forecast[4].temp.day,
+					max: forecast[4].temp.max,
+					min: forecast[4].temp.min
 
-    		if ( result.dataType in nestedData[result.date] == false) {
-    			// console.log(nestedData[result.date]);
-    			nestedData[result.date][result.datatype] = result.value;
-    		} else {
-    			nestedData[result.date][result.datatype] += result.value;
-    		}
-    	})
-    	// console.log(nestedData)
-    	return nestedData
+				},
+				five:  { 
+					date: moment(dates.five).format('dddd, MMMM Do YYYY'),
+    			summary: forecast[5].weather[0].description,
+    			icon: `http://openweathermap.org/img/w/${ forecast[0].weather[0].icon }.png`,
+    			temp: forecast[5].temp.day,
+					max: forecast[5].temp.max,
+					min: forecast[5].temp.min
+				}
+			}
+
+    	console.log(nestedData);
     }
 
     vm.getForecast = () => {
