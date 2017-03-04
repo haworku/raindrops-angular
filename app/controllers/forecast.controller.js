@@ -6,10 +6,20 @@
 
   function ForecastController($rootScope, $scope, $location, $q, moment, api) {
     let vm = this;
-    vm.weather = {}; 
     vm.forecast = {};
     vm.current = {};
+    vm.weather = {}; // For display: used in forecast.html
 
+    /**
+      * @return {String} 'zip code' | 'coordinates'
+    */
+    vm.checkType = () => {
+      if ($rootScope.zip !== 0 && $rootScope.load ){ 
+        return 'zip code'
+      } else {
+        return 'coordinates'
+      }
+    }
     vm.processData = (current,forecast) => {; 
     	let nestedData = {
     		now:  { 
