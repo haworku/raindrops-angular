@@ -6,10 +6,8 @@ angular.module('service.api', []);
 angular
   .module('service.api')
   .provider('api', function() {
-    var config = {
-      apiBase: 'http://generic1237.io/',
-      headers: {},
-      apiBranch: {},
+    let config = {
+      apiBase: 'http://generic.io/',
     };
 
     return {
@@ -18,6 +16,8 @@ angular
       },
 
       $get: ['$rootScope', '$http', '$q', function($rootScope, $http, $q) {
+        let _headers = {'headers': {'token': `${$rootScope.token}`}};
+
         return {
           /**
            * sends a limited query for next three daily summaries from zipcode
@@ -28,7 +28,7 @@ angular
             let deferred = $q.defer();
             
             $http
-              .get(`${ config.apiBase }data?datasetid=GHCND&locationid=ZIP:${ zipcode }&startdate=${ durationStart }/enddate= ${ durationEnd }`, config.headers)
+              .get(`${ config.apiBase }data?datasetid=GHCND&locationid=ZIP:${ zipcode }&startdate=${ durationStart }&enddate=${ durationEnd }`, _headers)
 
               .success((data) => {
                 deferred.resolve(data);
