@@ -30,6 +30,7 @@
         return 'coordinates'
       }
     }
+
     /**
        * Process api responses and return in format suitable for weather display
        * @param  {Object} current |  @param  {Object} forecast 
@@ -97,6 +98,11 @@
     	return (nestedData);
     }
 
+    /**
+      * Determine if gathering weather by zip code or coordinates
+      * Hit current and forecast APIs accordingly
+      * Calls processData and assigns return to vm.weather for display
+    */
     vm.getForecast = () => {
       console.log('forecasting...')
 
