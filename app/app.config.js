@@ -29,7 +29,8 @@
     ]);
 
     apiProvider.config({
-      apiBase: 'https://www.ncdc.noaa.gov/cdo-web/api/v2/',
+      apiBase: 'http://api.openweathermap.org/data/2.5/',
+      apiKey: '&APPID=d851c070fcf45167e7011c23bad6ac2b'
     });
     
   }

@@ -8,6 +8,7 @@ angular
   .provider('api', function() {
     let config = {
       apiBase: 'http://generic.io/',
+      apiKey: 'really-not-ideal'
     };
 
     return {
@@ -16,19 +17,18 @@ angular
       },
 
       $get: ['$rootScope', '$http', '$q', function($rootScope, $http, $q) {
-        let _headers = {'headers': {'token': `${$rootScope.token}`}};
 
         return {
           /**
-           * sends a limited query for next three daily summaries from zipcode
+           * get forecast for current date and next five daily summaries at zipcode
            * @param  {Integer} zipcode
            * @return {Promise}
            */
-          fetchDurationForecastForZip: (zipcode, durationStart, durationEnd) => {
+          fetchForecast: (zipcode) => {
             let deferred = $q.defer();
             
             $http
-              .get(`${ config.apiBase }data?datasetid=GHCND&locationid=ZIP:${ zipcode }&startdate=${ durationStart }&enddate=${ durationEnd }`, _headers)
+              .get(`${ config.apiBase }forecast/daily?zip=${ zipcode },us&cnt=6${ config.apiKey }`)
 
               .success((data) => {
                 deferred.resolve(data);
@@ -39,11 +39,15 @@ angular
 
             return deferred.promise;
           },
-
-          fetchDataTypes: () => {
+           /**
+           * get current weather at zip code
+           * @param  {Integer} zipcode
+           * @return {Promise}
+           */
+          fetchCurrent: (zipcode) => {
             let deferred = $q.defer();
             $http
-              .get(`${ config.apiBase}datatypes`, config.headers)
+              .get(`${ config.apiBase }weather?zip=${ zipcode },us${ config.apiKey }`)
 
               .success((data) => {
                 deferred.resolve(data);

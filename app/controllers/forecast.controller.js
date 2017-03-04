@@ -2,9 +2,9 @@
   angular.module('theApp')
     .controller('ForecastController', ForecastController);
 
-  ForecastController.$inject = ['$rootScope', '$scope', '$location', 'moment', 'api'];
+  ForecastController.$inject = ['$rootScope', '$scope', '$location', '$q', 'moment', 'api'];
 
-  function ForecastController($rootScope, $scope, $location, moment, api) {
+  function ForecastController($rootScope, $scope, $location, $q, moment, api) {
     let vm = this;
     vm.zip = 60661;
     vm.forecastDuration = moment.duration({'days' : 2});
@@ -33,22 +33,28 @@
     }
 
     vm.getForecast = () => {
-    	let start = moment(vm.today).format('YYYY-MM-DD')
-    	let endUnformatted =  vm.today.add(vm.forecastDuration);
-    	let end = moment(endUnformatted).format('YYYY-MM-DD')
-  
-	    api.fetchDurationForecastForZip(vm.zip, start, end)
+    	let forecast = {};
+    	let current = {};
+
+    	setCurrent = (response) => {
+    		current = response;
+	    }
+	    setForecast = (response) => {
+	    	forecast = response.list;
+	    }
+
+    	$q.all([ 
+    		api.fetchCurrent($rootScope.zip).then(setCurrent),
+    		api.fetchForecast($rootScope.zip).then(setForecast) 
+    	])
 	    .then((response) => { 
-	      vm.weatherObj = vm.processData(response.results);
-	      console.log(vm.weatherObj)
+	    	vm.weatherObj = vm.processData(current, forecast);
 	    })
 	    .catch((err) => {
-	      console.log(err);
-	    });  
-
+	    	console.log(err)
+	    })
     }
  	 
     vm.getForecast();
-
-}
+	}
 })(window.angular);

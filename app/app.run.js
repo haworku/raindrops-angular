@@ -14,6 +14,7 @@
    		console.log('no token, no love')
    	}
 
+    $rootScope.zip = 60661;
     $rootScope.today = function() {
       moment().utc().valueOf();
     };
