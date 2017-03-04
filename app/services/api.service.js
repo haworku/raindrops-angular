@@ -28,7 +28,7 @@ angular
             let deferred = $q.defer();
             
             $http
-              .get(`${ config.apiBase }forecast/daily?zip=${ zipcode },us&cnt=6${ config.apiKey }`)
+              .get(`${ config.apiBase }forecast/daily?zip=${ zipcode },us&cnt=6&units=imperial${ config.apiKey }`)
 
               .success((data) => {
                 deferred.resolve(data);
@@ -47,7 +47,7 @@ angular
           fetchCurrent: (zipcode) => {
             let deferred = $q.defer();
             $http
-              .get(`${ config.apiBase }weather?zip=${ zipcode },us${ config.apiKey }`)
+              .get(`${ config.apiBase }weather?zip=${ zipcode },us&units=imperial${ config.apiKey }`)
 
               .success((data) => {
                 deferred.resolve(data);
