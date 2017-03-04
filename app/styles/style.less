@@ -11,7 +11,7 @@ body{
 		padding: 1px;
 		text-align: center;
 		background-color: #BCBCBC;
-		min-height: 200px;
+		min-height: 220px;
 	}
 	&-now {
 		h3 {
@@ -19,19 +19,45 @@ body{
 			padding-right: 20px;
 			font-size: 15px;
 		}
+		.now-summary {
+			padding-right:25px;
+		}
 		.now-temp {
 			font-size: 100px;
 			font-weight: bold;
+			padding-left: 25px;
 		}
 	}
 	&-upcoming {
+		min-height: 200px;
 		h3 {
-			font-size: 20px;
+			text-align: right;
+			padding-right: 20px;
+			font-size: 15px;
+		}
+		.weather-summary{
+			padding-right: 20px;
+			font-size: 25px;
+		}
+		.weather-temp {
+			font-size: 75px;
+			font-weight: bold;
+			padding-left: 20px;
 		}
 	}
 	&-later {
+		min-height: 150px;
 		h3 {
-			font-size: 15px;
+			text-align: right;
+			padding-right: 20px;
+			font-size: 13px;
+		}
+		.weather-summary{
+			font-size: 10px;
+		}
+		.weather-temp {
+			font-size: 20px;
+			font-weight: bold;
 		}
 	}
 }

@@ -6,17 +6,39 @@
   Run.$inject = ['$rootScope', 'moment'];
 
   function Run($rootScope, moment) {
-    // $rootScope.token = 'your-token-here'; PRODUCTION
+    $rootScope.zip = 0;
+    $rootScope.coordinates = {};
+    $rootScope.load = false;
 
-    if ( $rootScope.token ){
-    	console.log('yay, you added a token')
-   	} else {
-   		console.log('no token, no love')
-   	}
+    $rootScope.loadDefault = () => {
+      console.log('loadDefault')
+      $rootScope.zip = 60661;
+      $rootScope.load = true;
+      $rootScope.$digest();
+    }
 
-    $rootScope.zip = 60661;
+    getLocation = () => {
+      let showPosition = (pos) => {
+        $rootScope.coordinates = { lat: pos.coords.latitude, lon: pos.coords.longitude};
+        console.log('coordinates', $rootScope.coordinates)
+        $rootScope.load = true;
+        $rootScope.$digest();
+      }
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition)      
+        $rootScope.zip = 0;
+      } else {
+        console.log('geolocation not supported, using default');
+        $rootScope.loadDefault();
+      }
+    }
+    
+    getLocation();
     $rootScope.today = function() {
       moment().utc().valueOf();
     };
+
+
   }
 })(window.angular);

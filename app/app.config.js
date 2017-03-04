@@ -8,18 +8,13 @@
   function Config($sceDelegateProvider, $routeProvider, $locationProvider, apiProvider) {
 
     $routeProvider
-      .when('/welcome', {
-        templateUrl: 'app/views/welcome.html',
-        controller: 'WelcomeController',
-        controllerAs: 'welcome',
-      })
       .when('/forecast', {
         templateUrl: 'app/views/forecast.html',
         controller: 'ForecastController',
         controllerAs: 'forecast',
       })
       .otherwise({
-        redirectTo: '/welcome',
+        redirectTo: '/forecast',
       });
 
     $locationProvider.html5Mode(true);
