@@ -6,9 +6,19 @@
 
   function ForecastController($rootScope, $scope, $location, $q, moment, api) {
     let vm = this;
-    vm.forecast = {};
-    vm.current = {};
     vm.weather = {}; // For display: used in forecast.html
+    vm.forecast = {}; // API response: forecast/daily? - five day forecast
+    vm.current = {}; // API response: weather? - weather now
+
+    /**
+       * Assign API response
+    */
+    vm.assignCurrent = (response) => {
+      vm.current = response;
+    }
+    vm.assignForecast = (response) => {
+      vm.forecast = response.list; 
+    }
 
     /**
       * @return {String} 'zip code' | 'coordinates'
@@ -20,6 +30,11 @@
         return 'coordinates'
       }
     }
+    /**
+       * Process api responses and return in format suitable for weather display
+       * @param  {Object} current |  @param  {Object} forecast 
+       * @return {Object}
+    */
     vm.processData = (current,forecast) => {; 
     	let nestedData = {
     		now:  { 
@@ -78,22 +93,18 @@
 				}
 			}
 
+      console.log('forecast complete.')
     	return (nestedData);
     }
 
     vm.getForecast = () => {
       console.log('forecasting...')
-    	let setCurrent = (response) => {
-    		vm.current = response;
-	    }
-	    let setForecast = (response) => {
-	    	vm.forecast = response.list;
-	    }
 
-      if ($rootScope.zip !== 0 && $rootScope.load ){
+      if ($rootScope.zip !== 0 && $rootScope.load ){ 
+        // when there's zipcode, use it. REFACTOR: try coordinates if fetch fails in .catch block
         $q.all([ 
-          api.fetchCurrentByZip($rootScope.zip).then(setCurrent),
-          api.fetchForecastByZip($rootScope.zip).then(setForecast) 
+          api.fetchCurrentByZip($rootScope.zip).then(vm.assignCurrent),
+          api.fetchForecastByZip($rootScope.zip).then(vm.assignForecast) 
         ])
         .then((response) => { 
           vm.weather = vm.processData(vm.current, vm.forecast);
@@ -102,10 +113,11 @@
           console.log(err)
         })
 
-      } else if ($rootScope.coordinates !== {} && $rootScope.load) {
+      } else if ($rootScope.coordinates !== {} && $rootScope.load) {  
+        // Try coordinates when no zipcode REFACTOR: direct of fetch fails in .catch block
         $q.all([ 
-          api.fetchCurrentByCoord($rootScope.coordinates.lat, $rootScope.coordinates.lon).then(setCurrent),
-          api.fetchForecastByCoord($rootScope.coordinates.lat,$rootScope.coordinates.lon).then(setForecast) 
+          api.fetchCurrentByCoord($rootScope.coordinates.lat, $rootScope.coordinates.lon).then(vm.assignCurrent),
+          api.fetchForecastByCoord($rootScope.coordinates.lat,$rootScope.coordinates.lon).then(vm.assignForecast) 
         ])
         .then((response) => { 
           vm.weather = vm.processData(vm.current, vm.forecast);
