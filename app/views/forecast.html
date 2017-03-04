@@ -1,8 +1,9 @@
 <div class="container-fluid">
 	<div class= "col-md-10 col-md-offset-1">
 		<div ng-if="!load">
-			<h1>FORECASTING ...</h1>
-			<button class="btn btn-warning" ng-click="loadDefault()">Skip this, use default</button>
+			<div class="alert alert-info">FORECASTING ... getting coordinates..</div>
+
+			<button class="btn btn-block btn-warning" ng-click="loadDefault()">Skip this, use default</button>
 			<div ng-show='isRouteLoading' class='loading-indicator'>" +
 			  <div class="loading-indicator-body"> +
 			    <h3 class="loading-title">Loading...</h3>" +
