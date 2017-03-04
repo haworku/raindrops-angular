@@ -6,7 +6,9 @@
 
   function ForecastController($rootScope, $scope, $location, $q, moment, api) {
     let vm = this;
-    vm.weather = {}; // display
+    vm.weather = {}; 
+    vm.forecast = {};
+    vm.current = {};
 
     vm.processData = (current,forecast) => {; 
     	let nestedData = {
@@ -70,29 +72,41 @@
     }
 
     vm.getForecast = () => {
-    	let forecast = {};
-    	let current = {};
-
-    	setCurrent = (response) => {
-    		current = response;
+      console.log('forecasting...')
+    	let setCurrent = (response) => {
+    		vm.current = response;
 	    }
-	    setForecast = (response) => {
-	    	forecast = response.list;
+	    let setForecast = (response) => {
+	    	vm.forecast = response.list;
 	    }
 
-    	$q.all([ 
-    		api.fetchCurrent($rootScope.zip).then(setCurrent),
-    		api.fetchForecast($rootScope.zip).then(setForecast) 
-    	])
-	    .then((response) => { 
-	    	vm.weather = vm.processData(current, forecast);
-        // console.log(vm.weather)
-	    })
-	    .catch((err) => {
-	    	console.log(err)
-	    })
-    }
- 	 
-    vm.getForecast();
+      if ($rootScope.zip !== 0 && $rootScope.load ){
+        $q.all([ 
+          api.fetchCurrentByZip($rootScope.zip).then(setCurrent),
+          api.fetchForecastByZip($rootScope.zip).then(setForecast) 
+        ])
+        .then((response) => { 
+          vm.weather = vm.processData(vm.current, vm.forecast);
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+
+      } else if ($rootScope.coordinates !== {} && $rootScope.load) {
+        $q.all([ 
+          api.fetchCurrentByCoord($rootScope.coordinates.lat, $rootScope.coordinates.lon).then(setCurrent),
+          api.fetchForecastByCoord($rootScope.coordinates.lat,$rootScope.coordinates.lon).then(setForecast) 
+        ])
+        .then((response) => { 
+          vm.weather = vm.processData(vm.current, vm.forecast);
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+
+      } else {
+        console.log('waiting for location')
+      }
+    } 
 	}
 })(window.angular);
