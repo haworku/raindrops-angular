@@ -7,11 +7,13 @@
   function ForecastController($rootScope, $scope, $location, moment, api) {
     let vm = this;
     vm.zip = 60661;
-    vm.weatherObj = {}; // data from various stations, nested by date and then by datatype 
     vm.forecastDuration = moment.duration({'days' : 2});
+    vm.weatherObj = {}; 
     vm.today = moment(new Date());
+    // data from various stations, nested by date and then by datatype 
 
     vm.processData = (data) => {
+    	// console.log(data)
     	let nestedData = {}
 
     	data.forEach( result => {
@@ -26,7 +28,7 @@
     			nestedData[result.date][result.datatype] += result.value;
     		}
     	})
-
+    	// console.log(nestedData)
     	return nestedData
     }
 
@@ -34,18 +36,19 @@
     	let start = moment(vm.today).format('YYYY-MM-DD')
     	let endUnformatted =  vm.today.add(vm.forecastDuration);
     	let end = moment(endUnformatted).format('YYYY-MM-DD')
-          
-    api.get(zip, start, end)
-    .then((response) => { 
-      vm.weatherObj = vm.processData(response.results);
-    })
-    .catch((err) => {
-      console.log(err);
-    });  
+  
+	    api.fetchDurationForecastForZip(vm.zip, start, end)
+	    .then((response) => { 
+	      vm.weatherObj = vm.processData(response.results);
+	      console.log(vm.weatherObj)
+	    })
+	    .catch((err) => {
+	      console.log(err);
+	    });  
 
     }
  	 
-
+    vm.getForecast();
 
 }
 })(window.angular);
