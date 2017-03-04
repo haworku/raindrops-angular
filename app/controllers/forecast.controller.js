@@ -2,9 +2,9 @@
   angular.module('theApp')
     .controller('ForecastController', ForecastController);
 
-  ForecastController.$inject = ['$scope', '$location', 'moment'];
+  ForecastController.$inject = ['$rootScope', '$scope', '$location', 'moment', 'api'];
 
-  function ForecastController($scope, $location, moment) {
+  function ForecastController($rootScope, $scope, $location, moment, api) {
     let vm = this;
     vm.zip = 60661;
     vm.forecastDuration = moment.duration(2, 'd')
@@ -30,7 +30,6 @@
     }
 
     vm.getForecast = () => {
-    	let start = moment($rootScope.today).format('YYYY-MM-DD')
     	let endUnformatted =  vm.today.add(vm.forecastDuration);
     	let end = moment(endUnformatted).format('YYYY-MM-DD')
           
