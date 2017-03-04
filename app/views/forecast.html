@@ -1,10 +1,39 @@
 <div class="container-fluid">
-Forecast
-<a 
-	class="btn btn-info btn-lg btn-block" 
-	href="/welcome"
-	role="button" >
-	<i class="glyphicon glyphicon-justify"></i>
-	&nbsp;&nbsp;Welcome
-</a>
+	<div class= "col-md-10 col-md-offset-1">
+		<h1>Raindrops Forecast<h1>
+		<div></div>
+
+		<div class="col-md-12">
+			<div class="col-md-12 weather-box weather-today">
+				Currently
+				<img class="img-responsive" src="forecast.weather.now.icon">
+			</div>
+
+			<div class="col-md-6 weather-box weather-upcoming">
+				Today
+				<img class="img-responsive" src="{{forecast.weather.today.icon}}">
+			</div>
+			<div class="col-md-6 weather-box weather-upcoming">
+				Tomorrow
+				<img class="img-responsive" src="{{forecast.weather.one.icon}}">
+			</div>
+
+			<div class="col-md-3 weather-box weather-later">
+				<h3 ng-bind="forecast.weather.two.date | amDateFormat:'dddd'"></h3>
+				<img src="{{forecast.weather.two.icon}}">
+			</div>
+			<div class="col-md-3 weather-box weather-later">
+				<h3 ng-bind="forecast.weather.three.date | amDateFormat:'dddd'"></h3>
+				<img src="{{forecast.weather.three.icon}}">
+			</div>
+			<div class="col-md-3 weather-box weather-later">
+				<h3 ng-bind="forecast.weather.four.date | amDateFormat:'dddd'"></h3>
+				<img src="{{forecast.weather.four.icon}}">
+			</div>
+			<div class="col-md-3 weather-box weather-later">
+				<h3 ng-bind="forecast.weather.five.date | amDateFormat:'dddd'"></h3>
+				<img src="{{forecast.weather.five.icon}}">
+			</div>
+		</div>
+	</div>
 </div>
