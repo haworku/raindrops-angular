@@ -1,9 +1,12 @@
 <div class="container-fluid">
 	<div class= "col-md-10 col-md-offset-1">
-		<h1>Raindrops Forecast<h1>
-		<div></div>
+	<h1>Raindrops Forecast</h1>
+		<div ng-if="!load">
+			<button class="btn btn-warning" ng-click="loadDefault()">Skip this, use default</button>
+			<p class="alert alert.warning">Loading...</p>
+		</div>
 
-		<div class="col-md-12">
+		<div ng-if="load && forecast.current" ng-init="forecast.getForecast()" class="col-md-12">
 			<div class="col-md-12 weather-box weather-now">
 				<h3>now</h3>
 				<img src="{{forecast.weather.now.icon}}">

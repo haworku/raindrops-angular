@@ -10,14 +10,14 @@
     $rootScope.coordinates = {};
     $rootScope.load = false;
 
+    // Geolocate and Load
     $rootScope.loadDefault = () => {
-      console.log('loadDefault')
+      console.log('loading default')
       $rootScope.zip = 60661;
       $rootScope.load = true;
-      $rootScope.$digest();
     }
 
-    getLocation = () => {
+    $rootScope.getLocation = () => {
       let showPosition = (pos) => {
         $rootScope.coordinates = { lat: pos.coords.latitude, lon: pos.coords.longitude};
         console.log('coordinates', $rootScope.coordinates)
@@ -27,14 +27,17 @@
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition)      
-        $rootScope.zip = 0;
+        $rootScope.zip = 0; // empty zip code because we are using coordinates
       } else {
-        console.log('geolocation not supported, using default');
+        console.log('geolocation not supported');
         $rootScope.loadDefault();
       }
+      $rootScope.$digest();
     }
     
-    getLocation();
+    $rootScope.getLocation();
+
+    // Moment
     $rootScope.today = function() {
       moment().utc().valueOf();
     };
