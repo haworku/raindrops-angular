@@ -11,14 +11,21 @@ const watch = {
 };
 
 gulp.task('js', () =>
-  gulp.src(['./app/app.js',
-            './app/app.config.js',
-            './app/app.token.js', // DEVELOPMENT
-            './app/app.run.js',
-            './app/**/*.js'])
-      .pipe(concat('script.js'))
-      .pipe(gulp.dest('dist/'))
-      .pipe(livereload())
+  gulp.src([
+    '/bower_components/jquery/dist/jquery.min.js',
+    '/bower_components/angular/angular.min.js',
+    '/bower_components/angular-route/angular-route.min.js',
+    '/bower_components/angular-sanitize/angular-sanitize.min.js',
+    '/bower_components/moment/min/moment.min.js',
+    '/bower_components/angular-moment/angular-moment.min.js',
+    './app/app.js',
+    './app/app.config.js',
+    './app/app.run.js',
+    './app/**/*.js'
+  ])
+    .pipe(concat('script.js'))
+    .pipe(gulp.dest('dist/'))
+    .pipe(livereload())
 );
 
 gulp.task('less', () =>
